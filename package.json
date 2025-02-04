@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "docx": "^9.1.1",
-    "mupdf": "^1.2.0"
+    "mupdf": "^1.2.0",
+    "pdfmake": "^0.2.18"
   }
 }
