@@ -1,7 +1,17 @@
 
+import * as fs from 'fs'
+
 export class Base {
   constructor () {
-    this.data = null
+    this.data = {
+      pages: [
+        {
+          content: [
+            'hello world',
+          ],
+        },
+      ],
+    }
     this.type = 'base'
   }
 
@@ -11,6 +21,11 @@ export class Base {
 
   async to () {
     console.log(`to ${this.type}`)
+  }
+
+  async save (name = 'output') {
+    const buffer = await this.to()
+    fs.writeFileSync(`${name}.${this.type}`, buffer)
   }
 }
 

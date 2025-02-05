@@ -5,4 +5,4 @@ const pdf = new PDF()
 
 pdf.from()
 
-pdf.to()
+pdf.save()

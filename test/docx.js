@@ -5,4 +5,4 @@ const docx = new DOCX()
 
 docx.from()
 
-docx.to()
+docx.save()
