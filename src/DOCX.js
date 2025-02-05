@@ -1,4 +1,6 @@
 
+import * as htmlparser2 from 'htmlparser2'
+import mammoth from 'mammoth'
 import * as docx from 'docx'
 import { Base } from './Base.js'
 
@@ -7,6 +9,12 @@ export class DOCX extends Base {
   constructor () {
     super()
     this.type = 'docx'
+  }
+
+  async from (buffer) {
+    const { value } = await mammoth.convertToHtml({ buffer })
+    const dom = new htmlparser2.parseDocument(value)
+    console.dir(dom, { depth: null })
   }
 
   render_paragraph (paragraph) {

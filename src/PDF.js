@@ -10,6 +10,22 @@ export class PDF extends Base {
     this.type = 'pdf'
   }
 
+  async from (buffer) {
+    let document = mupdfjs.PDFDocument.openDocument(buffer, "application/pdf")
+    let i = 0
+
+    const pages = []
+
+    while (i < document.countPages()) {
+      const page = new mupdfjs.PDFPage(document, i)
+      const json = page.toStructuredText("preserve-whitespace").asJSON()
+      pages.push(JSON.parse(json))
+      i++
+    }
+
+    console.dir(pages, { depth: null })
+  }
+
   render_paragraph (paragraph, doc) {
     doc.text(paragraph)
   }

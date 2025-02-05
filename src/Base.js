@@ -15,7 +15,7 @@ export class Base {
     this.type = 'base'
   }
 
-  async from () {
+  async from (buffer) {
     console.log(`from ${this.type}`)
   }
 
@@ -26,6 +26,11 @@ export class Base {
   async save (name = 'output') {
     const buffer = await this.to()
     fs.writeFileSync(`${name}.${this.type}`, buffer)
+  }
+
+  async read (name = 'output') {
+    const buffer = fs.readFileSync(`${name}.${this.type}`)
+    return this.from(buffer)
   }
 }
 
