@@ -3,7 +3,11 @@ import { PDF } from '../index.js'
 
 const pdf = new PDF()
 
-await pdf.save()
+pdf.log()
 
 await pdf.read()
+
+pdf.log()
+
+await pdf.save()
 

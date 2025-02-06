@@ -15,6 +15,13 @@ export class Base {
     this.type = 'base'
   }
 
+  log () {
+    console.dir({
+      type: this.type,
+      data: this.data,
+    }, { depth: null })
+  }
+
   async from (buffer) {
     console.log(`from ${this.type}`)
   }

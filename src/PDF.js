@@ -10,6 +10,23 @@ export class PDF extends Base {
     this.type = 'pdf'
   }
 
+  parse_paragraph (paragraph) {
+    if (paragraph.type !== 'text') {
+      return
+    }
+
+    return paragraph.lines.map(line => line.text).join(' ')
+  }
+
+  parse_page (page) {
+    const content = page.blocks.map(paragraph => this.parse_paragraph(paragraph)).filter(d => d)
+
+    return {
+      content,
+    }
+  }
+
+
   async from (buffer) {
     let document = mupdfjs.PDFDocument.openDocument(buffer, "application/pdf")
     let i = 0
@@ -19,11 +36,13 @@ export class PDF extends Base {
     while (i < document.countPages()) {
       const page = new mupdfjs.PDFPage(document, i)
       const json = page.toStructuredText("preserve-whitespace").asJSON()
-      pages.push(JSON.parse(json))
+      pages.push(this.parse_page(JSON.parse(json)))
       i++
     }
 
-    console.dir(pages, { depth: null })
+    this.data = {
+      pages,
+    }
   }
 
   render_paragraph (paragraph, doc) {

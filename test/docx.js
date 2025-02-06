@@ -3,7 +3,11 @@ import { DOCX } from '../index.js'
 
 const docx = new DOCX()
 
-await docx.save()
+docx.log()
 
 await docx.read()
+
+docx.log()
+
+await docx.save()
 
