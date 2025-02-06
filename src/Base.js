@@ -15,6 +15,12 @@ export class Base {
     this.type = 'base'
   }
 
+  convert (Type) {
+    const file = new Type()
+    file.data = this.data
+    return file
+  }
+
   log () {
     console.dir({
       type: this.type,
